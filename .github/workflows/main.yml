@@ -2,15 +2,43 @@ name: Main
 on: push
 
 jobs:
+  deps:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: echo Installing Dependencies
   build:
+    name: Build
+    needs: deps
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
       - name: Build
         run: echo Building
+  unittests:
+    name: Unit Test
+    needs: deps
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Tests
+        run: echo Running Unit Tests
+  static:
+    name: Static Code Analysis
+    needs: deps
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Static Code Analysis
+        run: echo Running Static Code Analysis
   test:
-    needs: build
+    needs: [build,unittests,static]
     name: Deploy Test
     environment: Test
     runs-on: ubuntu-latest

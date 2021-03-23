@@ -1,0 +1,38 @@
+name: Main
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build
+        run: echo Building
+  test:
+    needs: build
+    name: Deploy to test
+    environment:
+      name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: Deploying to test
+  stage:
+    needs: test
+    name: Deploy to stage
+    environment:
+      name: Stage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: Deploying to stage
+  prod:
+    needs: stage
+    name: Deploy to prod
+    environment:
+      name: Prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: Deploying to prod

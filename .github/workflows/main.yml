@@ -12,8 +12,7 @@ jobs:
   test:
     needs: build
     name: Deploy Test
-    environment:
-      name: Test
+    environment: Test
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
@@ -21,8 +20,7 @@ jobs:
   stage:
     needs: test
     name: Deploy Stage
-    environment:
-      name: Stage
+    environment: Stage
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
@@ -30,8 +28,7 @@ jobs:
   prod:
     needs: stage
     name: Deploy Prod
-    environment:
-      name: Prod
+    environment: Prod
     runs-on: ubuntu-latest
     steps:
       - name: Deploy

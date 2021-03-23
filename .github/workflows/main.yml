@@ -11,28 +11,28 @@ jobs:
         run: echo Building
   test:
     needs: build
-    name: Deploy to test
+    name: Deploy Test
     environment:
       name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        run: Deploying to test
+        run: echo Deploying to test
   stage:
     needs: test
-    name: Deploy to stage
+    name: Deploy Stage
     environment:
       name: Stage
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        run: Deploying to stage
+        run: echo Deploying to stage
   prod:
     needs: stage
-    name: Deploy to prod
+    name: Deploy Prod
     environment:
       name: Prod
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        run: Deploying to prod
+        run: echo Deploying to prod
